@@ -17,12 +17,15 @@ app.use(cors());
 
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
+    // host: "smtp.gmail.com",
+    // mail.privateemail.com
+    name:'mail.eyeframeng.com',
+    host:'mail.eyeframeng.com',
+    port:  465,
   // true for 465, false for other ports
     auth: {
-        user: 'henrysempire111@@gmail.com',
-        pass: 'slntxxalnbeutspy' // generated ethereal password
+        user: 'myorder@eyeframeng.com',
+        pass: 'Dee1dc28c0d6@' // generated ethereal password
     },
   });
 
@@ -79,9 +82,8 @@ let transporter = nodemailer.createTransport({
 
   app.post('/sendmessage', (req, res) => {
     const data = (req.body);
-    console.log(data)
     var mail = {
-        from: 'EyeFremeng',
+        from: 'myorder@eyeframeng.com',
         subject: data.title,
         text: data.content,
         to: data.emails,
@@ -96,6 +98,7 @@ let transporter = nodemailer.createTransport({
             msg: 'fail'
           })
         } else {
+          console.log('message suceefullly sent')
           res.json({
             msg: 'success ' + data
           })
