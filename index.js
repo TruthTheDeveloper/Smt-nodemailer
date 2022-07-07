@@ -79,15 +79,92 @@ let transporter = nodemailer.createTransport({
 // const d = <div>
 // <h1 style={{'color':'black', 'fontSize':'2rem'}}>You Succesfully place An Order for s;d;sd;llsd;</h1>
 // </div>
+// ${today}
+// ${transactionId}
+// ${initialState.subTotal}
+// ${initialState.grandTotal}
+// <div style='display:flex'>
+//                 <div style=''>
+//                         <h3>BILING INFO</h3>
+//                         <p>${initialState.firstName} ${initialState.lastName}</p>
+//                         <p>${initialState.address}</p>
+//                         <p>${initialState.city}</p>
+//                         <p>${initialState.postalCode}</p>
+//                         <p>${initialState.country}</p>
+//                     </div>
+//                     <div style='margin-left:10rem'>
+//                         <p>${initialState.firstName} ${initialState.lastName}</p>
+//                         <p>${initialState.address}</p>
+//                         <p>${initialState.city}</p>
+//                         <p>${initialState.postalCode}</p>
+//                         <p>${initialState.country}</p>
+//                     </div>
+//                 </div>
+                    
 
   app.post('/sendmessage', (req, res) => {
     const data = (req.body);
+    const items = req.body.items
+    const newItem = []
+
+    // console.log(items.id)
+    let img = []
+    items.forEach(item => {
+      console.log(item.productImage, 'image')
+      //  newItem.push(item.productImage)
+       img.push(item.productImage)
+    })
+    // console.log(items)
+    console.log(newItem, 'no-image')
+
     var mail = {
         from: 'myorder@eyeframeng.com',
         subject: data.title,
         text: data.content,
         to: data.emails,
-        html: data.html
+        html: `<div style='background:white;'>
+        <div style='width:40rem; background:#3730A3; margin-left:auto; margin-right:auto;'>
+            <div style='background:white; padding:5rem; margin:2rem'>
+            <div >
+                <img style='width:15rem; height:5rem' src="https://eyeframeng.com/wp-content/uploads/2020/11/cropped-eyeframeng-logo-1-1536x460-1.png"/>
+            </div>
+            <h1 style='fontSize:3rem; text-align:center;'>ORDER NO. </h1>
+            <p style='fontSize:1rem; text-align:center;'></p>
+            <h4>ITEMS ORDERED</h4>
+                <div style='border-top:1px solid grey; border-bottom:1px solid grey; fontSize:1rem; text-align:center; display:flex; justify-content:space-between;'>
+                <div style='display:flex;'>
+                    <div >
+                        <img style='width:10rem; height:10rem' src=${img}/>
+                    </div>
+                    <div style='margin-top:2rem'>
+                        <p>${newItem.productName}</p>
+                    </div>
+                </div>
+                <div style='margin-top:2rem'>
+                    <p>x${newItem.qty} ${newItem.productPrice}</p>
+                </div>
+            </div>
+            <div style='display:flex;>
+                <p>Discount(JUSTINCASE)</p>
+                <p style='margin-left:10rem'>-$18.00</p>
+            </div>
+            <div style='display:flex;'>
+                <p>Subtotal</p>
+                <p style='margin-left:14rem'></p>
+            </div>
+            <div style='display:flex;'>
+                <p>Royal Mail Tracked & Signed(4-9 days)</p>
+                <p style='margin-left:2.8rem'>$0.00</p>
+            </div>
+            <div style='display:flex;'>
+                <p>Total</p>
+                <p style='margin-left:15.2rem'></p>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>`
 
     };
     transporter.sendMail(mail, (err, data) => {
