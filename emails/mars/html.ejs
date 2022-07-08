@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link type="text/css" rel="stylesheet" href="/assets/style.css"/> -->
+        <!-- <title>RealSale</title> -->
+    </head>
+
+    
+<body>
+    <style>
+        section{
+            
+            /* font-size: 1rem; */
+            /* width:12rem; */
+            width:100%;
+           
+        }
+        .container{
+            background: #3730A3;
+            width: 50rem;
+            
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .mini__container{
+            background-color: white;
+            margin:2rem;
+            padding: 2rem;
+            font-size: 1.5rem;
+
+        }
+        .header__title{
+            text-align: center;
+        }
+        .logo{
+            width: 10rem;
+            height: 5rem;
+        }
+        .product__size{
+            width: 8rem;
+            height: 4rem;
+        }
+        .item__orderedbox{
+            border-top: 0.2px solid grey;
+            border-bottom:0.2px solid grey;
+            display: flex;
+            margin-top: 3px;
+            justify-content: space-between;
+        }
+        .item__ordered{
+            display: flex;
+            width:25rem;
+            
+        }
+        .product__price{
+            width:15rem;
+            margin-left: 5rem;
+            padding-top:20px;
+        }
+        .product__name{
+            width:15rem;
+            margin-left: 5rem;
+            
+            word-wrap: break-word;
+        }
+        .discount{
+            display: flex;
+        }
+        .discount__p{
+            margin-left: 5.9rem;
+        }
+        .subtotal{
+            display: flex;
+        }
+        .subtotal__p{
+            margin-left: 16.9rem;
+        }
+        .total{
+            display: flex;
+        }
+        .total__p{
+            margin-left: 19rem;
+        }
+        .info{
+            display: flex;
+        }
+        .info__item{
+            margin-left: 13rem;
+        }
+
+        
+
+    </style>
+    
+    
+    <section>
+        <div class="container">
+            <div class="mini__container">
+                <div class="header__title">
+                    <img class="logo" src="https://eyeframeng.com/wp-content/uploads/2020/11/cropped-eyeframeng-logo-1-1536x460-1.png" />
+                    <h1><%= orderId %> </h1>
+                    <p><%= date %> </p>
+                </div>
+                <div>
+                    <p>ITEMS ORDERED</p>
+                    <% product.forEach(item => { %>
+                        <div class="item__orderedbox">
+                            <div class="item__ordered">
+                                <img class="product__size" src='<%= item.productImage%>'/>
+                                <p class="product__name"><%= item.productName%></p>
+                            </div>
+                            <div>
+                                <div class="product__price">
+                                    x<%= item.qty%>  ₦<%= item.productPrice%>
+                                </div>
+                            </div>
+                        </div>
+    
+                    <% }) %> 
+                    
+                    <div>
+                        <div class="discount">
+                            <p>Discount(JUSTINCASE)</p>
+                            <p class="discount__p">-₦00.00</p>
+                        </div>
+                        <div class="subtotal">
+                            <p>Subtotal</p>
+                            <p class="subtotal__p">₦<%= orderInfo.subTotal %></p>
+                        </div>
+                        <div class="total">
+                            <p>Total</p>
+                            <p class="total__p">₦<%= orderInfo.grandTotal %></p>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div >
+                            <p>BILING INFO</p>
+                            <div>
+                                <p><%= orderInfo.firstName + ' ' + orderInfo.lastName %></p>
+                                <p><%= orderInfo.address %></p>
+                                <p><%= orderInfo.city %></p>
+                                <p><%= orderInfo.postalCode %></p>
+                                <p><%= orderInfo.state %></p>
+                                <p><%= orderInfo.telephone %></p>
+                            </div>
+                        </div>
+                        <div class="info__item">
+                            <p>SHIPPING ADDRESS</p>
+                            <div>
+                                <p><%= orderInfo.address %></p>
+                                <p><%= orderInfo.city %></p>
+                                <p><%= orderInfo.postalCode %></p>
+                                <p><%= orderInfo.state %></p>
+                            </div>
+                        </div>
+                    </div>
+                <p>If you have any complain email <a href="#">support@eyefremeng@gmail.com</a></p>
+            </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
